@@ -9,6 +9,7 @@ import (
 // TeleConfig struct that store your telegram config
 type TeleConfig struct {
 	apiToken string
+	baseURL  string
 }
 
 // TeleBaseURL storing Telegram base url
@@ -19,7 +20,7 @@ var HTTPClient = resty.New()
 
 // CreateTeleClient constructor function to create Tele Object client
 func CreateTeleClient(apiToken string) *TeleConfig {
-	return &TeleConfig{apiToken: apiToken}
+	return &TeleConfig{apiToken: apiToken, baseURL: fmt.Sprintf("%v%v", TeleBaseURL, apiToken)}
 }
 
 // SetWebhookResponse struct to storing webhook response
@@ -33,7 +34,7 @@ type SetWebhookResponse struct {
 func (client *TeleConfig) SetWebhook(URL string) (*SetWebhookResponse, error) {
 	res, err := HTTPClient.R().
 		SetQueryParam("url", URL).
-		Post(fmt.Sprintf("%v%v/setWebHook", TeleBaseURL, client.apiToken))
+		Post(fmt.Sprintf("%v/setWebHook", client.baseURL))
 
 	response := SetWebhookResponse{}
 	if err == nil {
