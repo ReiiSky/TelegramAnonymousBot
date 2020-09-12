@@ -42,3 +42,46 @@ func (client *TeleConfig) SetWebhook(URL string) (*SetWebhookResponse, error) {
 	}
 	return &response, err
 }
+
+// TextMessageBuilder function to construct text message form
+type TextMessageBuilder struct {
+	params map[string]string
+}
+
+// TextMessageBuilder ..
+func (client *TeleConfig) TextMessageBuilder() *TextMessageBuilder {
+	return &TextMessageBuilder{params: make(map[string]string)}
+}
+
+// ChatID function to set chat id
+func (builder *TextMessageBuilder) ChatID(id string) *TextMessageBuilder {
+	builder.params["chat_id"] = id
+	return builder
+}
+
+// ReplyTo function to set chat id
+func (builder *TextMessageBuilder) ReplyTo(id string) *TextMessageBuilder {
+	builder.params["reply_to_message_id"] = id
+	return builder
+}
+
+// Content function to set chat id
+func (builder *TextMessageBuilder) Content(text string) *TextMessageBuilder {
+	builder.params["text"] = text
+	return builder
+}
+
+// DisableNotification function to disable notification
+func (builder *TextMessageBuilder) DisableNotification(disable bool) *TextMessageBuilder {
+	builder.params["disable_notification"] = fmt.Sprint(disable)
+	return builder
+}
+
+// Push function to set chat id
+func (builder *TextMessageBuilder) Push(client *TeleConfig) error {
+	res, err := HTTPClient.R().
+		SetQueryParams(builder.params).
+		Get(fmt.Sprintf("%v/sendMessage", client.baseURL))
+	fmt.Print(res)
+	return err
+}
