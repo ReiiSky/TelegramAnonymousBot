@@ -1,6 +1,7 @@
 package pkg_test
 
 import (
+	"fmt"
 	"testing"
 
 	. "github.com/Satssuki/tele-anon-bot-queue/pkg"
@@ -34,10 +35,11 @@ func TestTeleConfig_SetWebhook(t *testing.T) {
 }
 
 func TestTelegramSendText(t *testing.T) {
-	client.
+	res, err := client.
 		TextMessageBuilder().
 		ChatID("1272147630").
 		ReplyTo("6979").
 		Content("Hello world, Programmed to work and not to feel").
 		Push(client)
+	fmt.Println(res, err)
 }
