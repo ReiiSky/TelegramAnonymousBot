@@ -33,12 +33,11 @@ type SetWebhookResponse struct {
 func (client *TeleConfig) SetWebhook(URL string) (*SetWebhookResponse, error) {
 	res, err := HTTPClient.R().
 		SetQueryParam("url", URL).
-		Post(fmt.Sprintf("%v%v/setWebHook", TeleBaseURL, URL))
+		Post(fmt.Sprintf("%v%v/setWebHook", TeleBaseURL, client.apiToken))
 
 	response := SetWebhookResponse{}
-
 	if err == nil {
-		err = UnmarshalByIOReader(res.RawResponse.Body, &response)
+		err = JSONUnmarshal(res.Body(), &response)
 	}
 	return &response, err
 }
