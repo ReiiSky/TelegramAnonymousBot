@@ -35,11 +35,11 @@ func TestTeleConfig_SetWebhook(t *testing.T) {
 }
 
 func TestTelegramSendText(t *testing.T) {
-	bulder := client.
+	builder := client.
 		TextMessageBuilder().
 		ChatID("1272147630").
 		ReplyTo("6979").
 		Content("Hello world, Programmed to work and not to feel")
-	client.Push(builder)
+	res, err := client.Push(builder)
 	fmt.Println(res, err)
 }

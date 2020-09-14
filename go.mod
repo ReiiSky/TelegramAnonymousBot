@@ -7,5 +7,5 @@ require (
 	github.com/go-redis/redis/v8 v8.0.0-beta.12 // indirect
 	github.com/go-resty/resty/v2 v2.3.0
 	github.com/json-iterator/go v1.1.10
-	github.com/labstack/echo/v4 v4.1.17 // indirect
+	github.com/labstack/echo/v4 v4.1.17
 )
