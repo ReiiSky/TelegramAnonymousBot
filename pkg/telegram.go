@@ -33,9 +33,7 @@ func GetDefaultTeleClient() *TeleConfig {
 
 // SetDefaultTeleClient set default tele client
 func SetDefaultTeleClient(apiToken string) {
-	DefaultTeleClient = &TeleConfig{
-		apiToken: apiToken,
-	}
+	DefaultTeleClient = CreateTeleClient(apiToken)
 }
 
 // SetWebhookResponse struct to storing webhook response
