@@ -106,7 +106,7 @@ type SendedResponseMessage struct {
 }
 
 // Push function to set chat id
-func (builder *TextMessageBuilder) Push(client *TeleConfig) (*SendedResponseMessage, error) {
+func (client *TeleConfig) Push(builder *TextMessageBuilder) (*SendedResponseMessage, error) {
 	res, err := HTTPClient.R().
 		SetQueryParams(builder.params).
 		Get(fmt.Sprintf("%v/sendMessage", client.baseURL))
