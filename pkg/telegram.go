@@ -18,9 +18,24 @@ const TeleBaseURL = `https://api.telegram.org/bot`
 // HTTPClient resty http client
 var HTTPClient = resty.New()
 
+// DefaultTeleClient will store the default client with package pattern
+var DefaultTeleClient *TeleConfig
+
 // CreateTeleClient constructor function to create Tele Object client
 func CreateTeleClient(apiToken string) *TeleConfig {
 	return &TeleConfig{apiToken: apiToken, baseURL: fmt.Sprintf("%v%v", TeleBaseURL, apiToken)}
+}
+
+// GetDefaultTeleClient return default tele client
+func GetDefaultTeleClient() *TeleConfig {
+	return DefaultTeleClient
+}
+
+// SetDefaultTeleClient set default tele client
+func SetDefaultTeleClient(apiToken string) {
+	DefaultTeleClient = &TeleConfig{
+		apiToken: apiToken,
+	}
 }
 
 // SetWebhookResponse struct to storing webhook response
