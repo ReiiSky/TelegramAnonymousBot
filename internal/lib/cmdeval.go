@@ -32,7 +32,16 @@ func SearchCommand(msg *pkg.Message) (string, error) {
 
 // StopCommand ..
 func StopCommand(msg *pkg.Message) (string, error) {
-	return "You stopped the chatting with current partner", nil
+	userID := fmt.Sprint(msg.Content.From.ID)
+	partnerID, isExist := service.ReadUserPartner(userID)
+	if !isExist || len(partnerID) < 2 {
+		if model.DefaultUserQueue().IsExist(userID) {
+			return "You already call /search or /next command, and now you are in queue", nil
+		}
+		return "Currently you don't have any partner please call type /search command", nil
+	}
+	service.RemovePartner(userID, partnerID)
+	return "You and your partner is unpaired", nil
 }
 
 // NextCommand ..
