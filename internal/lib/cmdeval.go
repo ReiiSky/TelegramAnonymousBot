@@ -46,7 +46,15 @@ func StopCommand(msg *pkg.Message) (string, error) {
 
 // NextCommand ..
 func NextCommand(msg *pkg.Message) (string, error) {
-	return "You skipped current partner", nil
+	userID := fmt.Sprint(msg.Content.From.ID)
+	partnerID, isExist := service.ReadUserPartner(userID)
+
+	if isExist {
+		service.RemovePartner(userID, partnerID)
+		model.DefaultUserQueue().Insert(userID)
+		return "You skipped current partner", nil
+	}
+	return "You don't have a partner or still in queue", nil
 }
 
 // StatsCommand ..
