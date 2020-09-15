@@ -5,4 +5,7 @@ run:
 build:
 	go build $(SERVERENDPOINT)
 
+docker:
+	docker build --tag telehook-anonymous .
+
 .PHONY: run
