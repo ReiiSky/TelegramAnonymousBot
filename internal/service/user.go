@@ -14,6 +14,11 @@ func ReadUserPartner(userID string) (string, bool) {
 	return userSessionCache.Read(userID)
 }
 
+// CountOfPartner ..
+func CountOfPartner() int {
+	return userSessionCache.Length() / 2
+}
+
 // WritePartner ..
 func WritePartner(userID, partnerID string) {
 	userSessionCache.Insert(userID, partnerID)
