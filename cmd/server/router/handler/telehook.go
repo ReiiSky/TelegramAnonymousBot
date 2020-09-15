@@ -33,5 +33,6 @@ func Telehook(c echo.Context) error {
 		pkg.GetDefaultTeleClient().Push(compiledMessage)
 		return c.NoContent(204)
 	}
+	lib.MessageDeliverQueue <- capturedMessage
 	return c.NoContent(201)
 }
