@@ -1,6 +1,7 @@
 package model
 
 import (
+	"container/list"
 	"fmt"
 	"sync"
 
@@ -57,11 +58,16 @@ var userQueue *UserQueue
 
 // DefaultUserQueue ..
 func DefaultUserQueue() *UserQueue {
-	if userQueue == nil {
-		userQueue = &UserQueue{
-			Queue: module.SimpleQueue{},
-			Cache: module.SafeCache{},
-		}
-	}
 	return userQueue
+}
+
+func init() {
+	userQueue = &UserQueue{
+		Queue: module.SimpleQueue{
+			List: list.New(),
+		},
+		Cache: module.SafeCache{
+			Record: make(map[string]string),
+		},
+	}
 }
