@@ -24,6 +24,7 @@ func SearchCommand(msg *pkg.Message) (string, error) {
 		if model.DefaultUserQueue().IsExist(userID) {
 			return "You already added before to matching queue", nil
 		}
+		model.DefaultUserQueue().Insert(userID)
 		return "You added to matching queue", nil
 	}
 	return "You already had a partner", nil
