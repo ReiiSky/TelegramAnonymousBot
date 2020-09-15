@@ -10,7 +10,7 @@ import (
 
 // MessageDeliverQueue queue to delivering message through worker
 // i using channel to prevent goroutine ownership race
-var MessageDeliverQueue chan *pkg.Message
+var MessageDeliverQueue = make(chan *pkg.Message)
 
 // StartWorker ..
 func StartWorker(workerCount int) {
