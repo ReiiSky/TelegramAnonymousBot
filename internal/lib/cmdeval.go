@@ -51,5 +51,5 @@ func NextCommand(msg *pkg.Message) (string, error) {
 
 // StatsCommand ..
 func StatsCommand(msg *pkg.Message) (string, error) {
-	return "heheheheh", nil
+	return fmt.Sprintf("Paired count: %v", service.CountOfPartner()), nil
 }
