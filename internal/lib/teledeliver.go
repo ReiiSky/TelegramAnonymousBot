@@ -13,9 +13,9 @@ import (
 var MessageDeliverQueue chan *pkg.Message
 
 // StartWorker ..
-func StartWorker(workerCount uint) {
+func StartWorker(workerCount int) {
 	for i := 0; i < workerCount; i++ {
-		workerCount()
+		workerFunction()
 	}
 }
 
