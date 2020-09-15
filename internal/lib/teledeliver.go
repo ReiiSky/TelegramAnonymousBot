@@ -28,7 +28,11 @@ func workerFunction() {
 			partnerID, isExist := service.ReadUserPartner(fmt.Sprint(message.Content.From.ID))
 			if isExist && message.Content.Reply.From.Username != username {
 
-				textBuilder := c.TextMessageBuilder().ChatID(partnerID).Content(message.Content.Text)
+				textBuilder := c.
+					TextMessageBuilder().
+					ChatID(partnerID).
+					Content(fmt.Sprintf("%v: %v", message.Content.From.LastName, message.Content.Text))
+
 				replyID := message.Content.Reply.MessageID
 
 				if replyID > 0 {
